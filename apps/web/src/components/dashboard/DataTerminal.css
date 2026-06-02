@@ -1,0 +1,56 @@
+.data-terminal {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(0, 212, 255, 0.1);
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  line-height: 1.6;
+  height: 100%;
+  min-height: 200px;
+  overflow: hidden;
+}
+
+.terminal-content {
+  padding: var(--space-sm) var(--space-md);
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.terminal-line {
+  display: flex;
+  gap: var(--space-sm);
+  white-space: nowrap;
+  opacity: 0;
+  animation: terminal-fade-in 0.3s ease-out forwards;
+}
+
+@keyframes terminal-fade-in {
+  from { opacity: 0; transform: translateX(-4px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.terminal-ts {
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+}
+
+.terminal-arrow {
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.terminal-line--data .terminal-data { color: #00d4ff; }
+.terminal-line--info .terminal-data { color: #7a8599; }
+.terminal-line--success .terminal-data { color: #00ff88; }
+.terminal-line--warning .terminal-data { color: #ffaa00; }
+
+.terminal-cursor {
+  color: var(--color-success);
+  animation: cursor-blink 1s step-end infinite;
+}
+
+@keyframes cursor-blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}

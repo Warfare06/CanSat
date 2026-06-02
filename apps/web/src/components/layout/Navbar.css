@@ -1,0 +1,233 @@
+/* ============================================
+   Navbar Styles
+   ============================================ */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+  background: rgba(6, 10, 20, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0, 212, 255, 0.08);
+}
+
+.navbar-inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Logo */
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+}
+
+.navbar-logo-icon {
+  display: flex;
+  align-items: center;
+  filter: drop-shadow(0 0 6px rgba(0, 212, 255, 0.3));
+}
+
+.navbar-logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.navbar-brand {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  color: var(--color-text-primary);
+  background: linear-gradient(135deg, #00d4ff, #ff8c00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.navbar-subtitle {
+  font-family: var(--font-heading);
+  font-size: 0.5rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+}
+
+/* Nav Links */
+.navbar-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+/* Live Badge */
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.live-badge {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 6px 14px;
+  border: 1px solid rgba(0, 255, 136, 0.25);
+  border-radius: var(--radius-full);
+  background: rgba(0, 255, 136, 0.05);
+}
+
+.live-badge-text {
+  font-family: var(--font-heading);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--color-success);
+}
+
+/* Hamburger */
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 22px;
+}
+
+.hamburger span {
+  display: block;
+  height: 2px;
+  background: var(--color-text-primary);
+  border-radius: 2px;
+  transition: all var(--transition-base);
+}
+
+.hamburger.open span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Mobile Nav */
+.mobile-nav {
+  display: none;
+  flex-direction: column;
+  padding: var(--space-md) var(--space-lg);
+  gap: var(--space-xs);
+  background: rgba(6, 10, 20, 0.95);
+  border-bottom: 1px solid rgba(0, 212, 255, 0.08);
+}
+
+.mobile-nav.open {
+  display: flex;
+}
+
+.mobile-nav-link {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.mobile-nav-link:hover,
+.mobile-nav-link.active {
+  color: var(--color-primary);
+  background: var(--color-primary-dim);
+}
+
+/* Admin / Login Links */
+.admin-link {
+  color: var(--color-secondary) !important;
+  border: 1px solid rgba(255, 140, 0, 0.25);
+  border-radius: var(--radius-full);
+  padding: 5px 12px !important;
+  background: rgba(255, 140, 0, 0.05);
+  font-size: 0.6rem !important;
+}
+
+.admin-link:hover,
+.admin-link.active {
+  background: rgba(255, 140, 0, 0.12);
+  box-shadow: 0 0 12px rgba(255, 140, 0, 0.15);
+}
+
+.admin-link.active::after {
+  display: none;
+}
+
+.login-link {
+  font-size: 0.6rem !important;
+  opacity: 0.7;
+}
+
+.login-link:hover {
+  opacity: 1;
+}
+
+.navbar-admin-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.navbar-logout-btn {
+  background: none;
+  border: 1px solid rgba(255, 51, 102, 0.2);
+  border-radius: var(--radius-full);
+  color: var(--color-danger);
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  opacity: 0.6;
+}
+
+.navbar-logout-btn:hover {
+  opacity: 1;
+  background: rgba(255, 51, 102, 0.1);
+}
+
+@media (max-width: 900px) {
+  .navbar-nav {
+    display: none;
+  }
+  .mobile-menu-btn {
+    display: block;
+  }
+  .live-badge-text {
+    display: none;
+  }
+  .login-link {
+    display: none;
+  }
+}

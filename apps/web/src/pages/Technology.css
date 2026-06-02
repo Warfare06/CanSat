@@ -1,0 +1,233 @@
+/* ============================================
+   Technology Page Styles
+   ============================================ */
+
+.tech-page {
+  padding-top: var(--space-2xl);
+  padding-bottom: var(--space-2xl);
+}
+
+.tech-hero {
+  margin-bottom: var(--space-xl);
+}
+
+.tech-diagrams {
+  margin-bottom: var(--space-3xl);
+}
+
+.tech-card {
+  min-height: 340px;
+}
+
+/* Diagram box */
+.tech-diagram-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+  padding: var(--space-lg) 0;
+}
+
+.diagram-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-heading);
+  text-align: center;
+}
+
+.diagram-node span {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.diagram-node small {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--color-text-muted);
+}
+
+.diagram-node--central {
+  background: var(--color-primary-dim);
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
+  padding: var(--space-md) var(--space-xl);
+}
+
+.diagram-node--central span {
+  font-size: 0.9rem;
+}
+
+.diagram-peripherals {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-sm);
+  width: 100%;
+}
+
+.diagram-node--peripheral {
+  background: rgba(255, 255, 255, 0.03);
+  border: var(--border-subtle);
+  color: var(--color-text-secondary);
+  padding: var(--space-sm);
+}
+
+/* Specs List */
+.tech-specs-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding: var(--space-sm) 0;
+}
+
+.tech-spec-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-xs) 0;
+  border-bottom: var(--border-subtle);
+}
+
+.tech-spec-label {
+  font-family: var(--font-heading);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+}
+
+.tech-spec-value {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--color-text-primary);
+}
+
+/* Power Flow */
+.power-flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding-top: var(--space-md);
+  margin-top: var(--space-sm);
+  border-top: var(--border-subtle);
+}
+
+.power-flow-node {
+  font-family: var(--font-heading);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--color-secondary);
+  padding: 6px 12px;
+  border: 1px solid var(--color-secondary-dim);
+  border-radius: var(--radius-sm);
+  background: var(--color-secondary-dim);
+}
+
+.power-flow-arrow {
+  color: var(--color-secondary);
+  font-size: 1rem;
+  opacity: 0.5;
+}
+
+/* Pipeline */
+.tech-pipeline {
+  margin-bottom: var(--space-3xl);
+}
+
+.pipeline-flow {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0;
+  flex-wrap: wrap;
+  margin-top: var(--space-xl);
+}
+
+.pipeline-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 150px;
+  position: relative;
+}
+
+.pipeline-icon {
+  font-size: 1.5rem;
+  margin-bottom: var(--space-sm);
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: var(--border-primary);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-card);
+}
+
+.pipeline-step-title {
+  font-size: 0.7rem;
+  color: var(--color-text-primary);
+  margin-bottom: 4px;
+}
+
+.pipeline-step-detail {
+  font-size: 0.65rem;
+  color: var(--color-text-muted);
+  line-height: 1.4;
+}
+
+.pipeline-connector {
+  position: absolute;
+  right: -16px;
+  top: 24px;
+  width: 32px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-primary), transparent);
+  opacity: 0.4;
+}
+
+/* Tech List */
+.tech-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.tech-list li {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  padding-left: var(--space-md);
+  position: relative;
+}
+
+.tech-list li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--color-primary);
+}
+
+.tech-software {
+  margin-bottom: var(--space-2xl);
+}
+
+@media (max-width: 768px) {
+  .pipeline-flow {
+    flex-direction: column;
+    align-items: center;
+  }
+  .pipeline-connector {
+    display: none;
+  }
+  .diagram-peripherals {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

@@ -1,0 +1,176 @@
+/* ============================================
+   Team Page Styles
+   ============================================ */
+
+.team-page {
+  padding-top: var(--space-2xl);
+  padding-bottom: var(--space-2xl);
+}
+
+.team-hero {
+  margin-bottom: var(--space-xl);
+  text-align: center;
+}
+
+/* Team Members Grid */
+.team-members {
+  margin-bottom: var(--space-3xl);
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--space-lg);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.member-card {
+  text-align: center;
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.member-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 2px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 212, 255, 0.06);
+  margin-bottom: var(--space-sm);
+}
+
+.member-initials {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+}
+
+.member-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.member-role {
+  font-family: var(--font-heading);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.member-socials {
+  display: flex;
+  gap: var(--space-sm);
+  margin-top: var(--space-sm);
+}
+
+.member-social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--color-text-secondary);
+  transition: all var(--transition-fast);
+}
+
+.member-social-link:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  background: var(--color-primary-dim);
+  transform: translateY(-2px);
+}
+
+/* Notice Card */
+.team-notice {
+  max-width: 700px;
+  margin: 0 auto var(--space-3xl);
+}
+
+.team-notice-card {
+  text-align: center;
+  padding: var(--space-2xl) var(--space-xl);
+}
+
+.notice-icon {
+  font-size: 3rem;
+  margin-bottom: var(--space-lg);
+}
+
+.notice-title {
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.notice-desc {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  line-height: 1.8;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.notice-divider {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+  margin: var(--space-lg) auto;
+}
+
+.notice-cta {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+}
+
+.notice-update {
+  font-family: var(--font-heading);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  margin-top: var(--space-md);
+}
+
+/* Roles */
+.team-roles {
+  margin-bottom: var(--space-2xl);
+}
+
+.role-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding: var(--space-lg);
+}
+
+.role-title {
+  font-size: 0.85rem;
+  color: var(--color-primary);
+}
+
+.role-desc {
+  font-size: 0.78rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  flex: 1;
+}
+
+.role-apply {
+  align-self: flex-start;
+  margin-top: var(--space-sm);
+  font-size: 0.65rem;
+  padding: 6px 14px;
+}

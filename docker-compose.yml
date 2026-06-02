@@ -1,0 +1,98 @@
+version: '3.8'
+
+services:
+  # ============================================
+  # PostgreSQL + TimescaleDB
+  # ============================================
+  postgres:
+    image: timescale/timescaledb:latest-pg16
+    container_name: cansat-postgres
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: cansat_db
+      POSTGRES_USER: cansat_user
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-cansat_secure_password}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./server/prisma/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cansat_user -d cansat_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ============================================
+  # Redis (session cache, pub/sub, token storage)
+  # ============================================
+  redis:
+    image: redis:7-alpine
+    container_name: cansat-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes --maxmemory 100mb --maxmemory-policy allkeys-lru
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ============================================
+  # Node.js API Server
+  # ============================================
+  api:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: cansat-api
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    environment:
+      NODE_ENV: production
+      PORT: 3001
+      DATABASE_URL: postgresql://cansat_user:${DB_PASSWORD:-cansat_secure_password}@postgres:5432/cansat_db
+      REDIS_URL: redis://redis:6379
+      JWT_ACCESS_SECRET: ${JWT_ACCESS_SECRET}
+      JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET}
+      MQTT_BROKER_URL: ${MQTT_BROKER_URL}
+      MQTT_USERNAME: ${MQTT_USERNAME}
+      MQTT_PASSWORD: ${MQTT_PASSWORD}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@cansatorbital.com}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-changeme123}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3001/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ============================================
+  # Nginx Reverse Proxy (optional, for self-hosted)
+  # ============================================
+  nginx:
+    image: nginx:alpine
+    container_name: cansat-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./apps/web/dist:/usr/share/nginx/html
+    depends_on:
+      - api
+    profiles:
+      - self-hosted
+
+volumes:
+  postgres_data:
+  redis_data:

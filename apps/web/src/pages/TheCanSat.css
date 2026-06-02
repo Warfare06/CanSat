@@ -1,0 +1,160 @@
+/* ============================================
+   The CanSat Page Styles
+   ============================================ */
+
+.cansat-page {
+  padding-top: var(--space-2xl);
+  padding-bottom: var(--space-2xl);
+}
+
+.section-title {
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  margin-bottom: var(--space-md);
+}
+
+.section-desc {
+  color: var(--color-text-secondary);
+  max-width: 700px;
+  font-size: 0.9rem;
+  line-height: 1.8;
+  margin-bottom: var(--space-2xl);
+}
+
+/* Spec Cards */
+.cansat-specs {
+  margin-bottom: var(--space-3xl);
+}
+
+.spec-card {
+  text-align: center;
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.spec-icon {
+  font-size: 1.8rem;
+  margin-bottom: var(--space-md);
+}
+
+.spec-value {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  margin-bottom: var(--space-xs);
+}
+
+.spec-label {
+  font-family: var(--font-heading);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-sm);
+}
+
+.spec-desc {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+/* Components Grid */
+.cansat-components {
+  margin-bottom: var(--space-3xl);
+}
+
+.components-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+  margin-top: var(--space-xl);
+}
+
+.component-card {
+  padding: var(--space-lg);
+  animation: fade-in-up 0.6s ease-out both;
+}
+
+.component-indicator {
+  width: 32px;
+  height: 3px;
+  border-radius: var(--radius-full);
+  margin-bottom: var(--space-md);
+}
+
+.component-name {
+  font-size: 0.85rem;
+  margin-bottom: var(--space-sm);
+}
+
+.component-desc {
+  font-size: 0.78rem;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+}
+
+/* Process Timeline */
+.cansat-process {
+  margin-bottom: var(--space-2xl);
+}
+
+.process-timeline {
+  max-width: 700px;
+  margin: var(--space-xl) auto 0;
+  position: relative;
+}
+
+.process-timeline::before {
+  content: '';
+  position: absolute;
+  left: 24px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--color-primary), var(--color-secondary));
+  opacity: 0.3;
+}
+
+.process-step {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-lg);
+  padding: var(--space-md) 0;
+  position: relative;
+}
+
+.process-number {
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-card);
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.process-title {
+  font-size: 0.85rem;
+  color: var(--color-text-primary);
+  margin-bottom: 4px;
+}
+
+.process-desc {
+  font-size: 0.78rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .components-grid {
+    grid-template-columns: 1fr;
+  }
+}

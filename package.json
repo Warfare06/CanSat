@@ -1,0 +1,18 @@
+{
+  "name": "cansat-astra-maven",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Astra Maven CanSat Mission Control Platform — Real-time telemetry dashboard",
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "server"
+  ],
+  "scripts": {
+    "dev:web": "npm run dev --workspace=@cansat/web",
+    "dev:server": "npm run dev --workspace=@cansat/server",
+    "dev:mobile": "npm run dev --workspace=@cansat/mobile",
+    "build:web": "npm run build --workspace=@cansat/web",
+    "build:server": "npm run build --workspace=@cansat/server"
+  }
+}

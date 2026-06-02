@@ -1,0 +1,57 @@
+/* ============================================
+   Sensors Page Styles
+   ============================================ */
+
+.sensors-page {
+  padding-top: var(--space-2xl);
+  padding-bottom: var(--space-2xl);
+}
+
+.sensors-hero {
+  margin-bottom: var(--space-xl);
+}
+
+.sensor-charts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+  margin-bottom: var(--space-3xl);
+}
+
+.sensor-chart-card {
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sensor-chart-container {
+  flex: 1;
+  min-height: 180px;
+}
+
+.sensor-live-dot {
+  display: flex;
+  align-items: center;
+}
+
+.sensor-methodology {
+  margin-bottom: var(--space-2xl);
+}
+
+.methodology-text {
+  font-size: 0.82rem;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+}
+
+@media (max-width: 1024px) {
+  .sensor-charts-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .sensor-charts-grid {
+    grid-template-columns: 1fr;
+  }
+}

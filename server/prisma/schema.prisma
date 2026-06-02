@@ -1,0 +1,178 @@
+// ============================================
+// CanSat Astra Maven — Prisma Database Schema
+// ============================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// === Authentication & Users ===
+
+model User {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  username     String   @unique
+  passwordHash String   @map("password_hash")
+  role         UserRole @default(VIEWER)
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  refreshTokens RefreshToken[]
+  missions      Mission[]
+
+  @@map("users")
+}
+
+enum UserRole {
+  ADMIN
+  OPERATOR
+  VIEWER
+}
+
+model RefreshToken {
+  id        String   @id @default(uuid())
+  token     String   @unique
+  userId    String   @map("user_id")
+  expiresAt DateTime @map("expires_at")
+  createdAt DateTime @default(now()) @map("created_at")
+  revoked   Boolean  @default(false)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([token])
+  @@map("refresh_tokens")
+}
+
+// === Missions ===
+
+model Mission {
+  id          String        @id @default(uuid())
+  name        String
+  description String?
+  status      MissionStatus @default(PLANNED)
+  launchDate  DateTime?     @map("launch_date")
+  deviceId    String        @map("device_id")
+  createdBy   String?       @map("created_by")
+  createdAt   DateTime      @default(now()) @map("created_at")
+  updatedAt   DateTime      @updatedAt @map("updated_at")
+
+  creator    User?           @relation(fields: [createdBy], references: [id])
+  telemetry  Telemetry[]
+
+  @@index([deviceId])
+  @@index([status])
+  @@map("missions")
+}
+
+enum MissionStatus {
+  PLANNED
+  PRE_LAUNCH
+  ASCENDING
+  APOGEE
+  DESCENDING
+  LANDED
+  RECOVERED
+  COMPLETED
+  ABORTED
+}
+
+// === Telemetry Data ===
+
+model Telemetry {
+  id        String   @id @default(uuid())
+  missionId String   @map("mission_id")
+  deviceId  String   @map("device_id")
+  seq       Int
+  timestamp DateTime @default(now())
+
+  // Sensor data
+  pressure    Float
+  temperature Float
+  humidity    Float
+  altitude    Float
+
+  // IMU data
+  accelX Float @map("accel_x")
+  accelY Float @map("accel_y")
+  accelZ Float @map("accel_z")
+  gyroX  Float @map("gyro_x")
+  gyroY  Float @map("gyro_y")
+  gyroZ  Float @map("gyro_z")
+  magX   Float @map("mag_x")
+  magY   Float @map("mag_y")
+  magZ   Float @map("mag_z")
+
+  // GPS data
+  gpsLatitude   Float  @map("gps_latitude")
+  gpsLongitude  Float  @map("gps_longitude")
+  gpsAltitude   Float  @map("gps_altitude")
+  gpsSpeed      Float  @map("gps_speed")
+  gpsSatellites Int    @map("gps_satellites")
+  gpsFix        Boolean @map("gps_fix")
+
+  // Power & signal
+  batteryVoltage    Float @map("battery_voltage")
+  batteryPercentage Float @map("battery_percentage")
+  rssi              Float
+
+  mission Mission @relation(fields: [missionId], references: [id], onDelete: Cascade)
+
+  @@index([missionId, timestamp])
+  @@index([deviceId, timestamp])
+  @@index([timestamp])
+  @@map("telemetry")
+}
+
+// === Team Members ===
+
+model TeamMember {
+  id       String  @id @default(uuid())
+  name     String
+  role     String
+  bio      String?
+  photoUrl String? @map("photo_url")
+  order    Int     @default(0)
+  active   Boolean @default(true)
+
+  @@map("team_members")
+}
+
+// === Sponsors ===
+
+model Sponsor {
+  id      String      @id @default(uuid())
+  name    String
+  logoUrl String?     @map("logo_url")
+  website String?
+  tier    SponsorTier @default(BRONZE)
+  active  Boolean     @default(true)
+
+  @@map("sponsors")
+}
+
+enum SponsorTier {
+  PLATINUM
+  GOLD
+  SILVER
+  BRONZE
+}
+
+// === Contact Messages ===
+
+model ContactMessage {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  subject   String
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("contact_messages")
+}

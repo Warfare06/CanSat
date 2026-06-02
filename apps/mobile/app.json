@@ -1,0 +1,23 @@
+{
+  "expo": {
+    "name": "CanSat Mission Control",
+    "slug": "cansat-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "scheme": "cansat",
+    "splash": {
+      "backgroundColor": "#060a14"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#060a14"
+      },
+      "package": "com.cansatorbital.missioncontrol"
+    },
+    "plugins": [
+      "expo-router"
+    ]
+  }
+}
